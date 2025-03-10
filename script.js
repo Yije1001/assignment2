@@ -1,112 +1,208 @@
-document.addEventListener('DOMContentLoaded', function() {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    const checkboxContainer = document.querySelector('.robot-checkbox');
-    const customCheckbox = document.querySelector('.custom-checkbox');
-    const leftEye = document.querySelector('.left-eye');
-    const rightEye = document.querySelector('.right-eye');
-    const leftLeg = document.querySelector('.left-leg');
-    const rightLeg = document.querySelector('.right-leg');
-    const leftFoot = document.querySelector('.left-foot');
-    const rightFoot = document.querySelector('.right-foot');
-    const legs = document.querySelector('.legs')
-    
-    // 도망갈 범위 & 거리
-    const escapeRadius = 40;
-    const escapeDistance = 20;
-    let moveX = 0, moveY = 0;
+body {
+    transform: scale(0.8);
+    transform-origin: top left; 
+    width: 125%;
+}
 
-    // 체크박스 도망가기
-    checkboxContainer.addEventListener('mousemove', (e) => {
-        const rect = customCheckbox.getBoundingClientRect();
-        const checkboxCenterX = rect.left + rect.width / 2;
-        const checkboxCenterY = rect.top + rect.height / 2;
-        legs.style.left = rect.left;
-        legs.style.top = rect.top;
-    
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
-        
-        const deltaX = checkboxCenterX - mouseX;
-        const deltaY = checkboxCenterY - mouseY;
-        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    
-        if (distance < escapeRadius) {
-            moveX = (deltaX / distance) * escapeDistance;
-            moveY = (deltaY / distance) * escapeDistance;
 
-            // Get current transform values
-            let currentTransform = customCheckbox.style.transform;
-            let translateX = 0, translateY = 0;
-            if (currentTransform.includes('translate')) {
-                const match = currentTransform.match(/translate\(([-\d.]+)px,\s*([-\d.]+)px\)/);
-                if (match) {
-                    translateX = parseFloat(match[1]);
-                    translateY = parseFloat(match[2]);
-                }
-            }
+.block-1{
+ position: fixed;
+ top: 0px;
+ left: 0;
+ width: 100%;
+ padding: 10px 0;
+ background-color: rgba(240, 240, 240, 0.543);
+ backdrop-filter: blur(10px);
+ z-index: 100;
+}
 
-            translateX += moveX;
-            translateY += moveY;
+.block-2{
+    margin-top: 70px;
+    align-items: center;
+    font-family: "Harmattan", sans-serif;
+}
 
-            // Get screen width and height
-            const screenWidth = window.innerWidth;
-            const screenHeight = window.innerHeight;
+nav {
+    background-color: transparent;
+    padding: 30px 0;
+    text-align: center;
+}
 
-            // Prevent checkbox from going outside the screen bounds
-            if (translateX <= 0 || translateX >= screenWidth - rect.width) {
-                moveX = -moveX;  // Reverse direction if it hits the edge
-            }
-            if (translateY <= 0 || translateY >= screenHeight - rect.height) {
-                moveY = -moveY;  // Reverse direction if it hits the edge
-            }
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
 
-            customCheckbox.style.transform = `translate(${translateX}px, ${translateY}px)`;
+nav ul li {
+    margin: 0 20px;
+}
 
-            // 눈과 다리 등장
-            leftEye.style.display = 'block';
-            rightEye.style.display = 'block';
-            leftLeg.style.display = 'block';
-            rightLeg.style.display = 'block';
-            leftFoot.style.display = 'block';
-            rightFoot.style.display = 'block';
-            legs.style.display = 'block'
+nav ul li a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+}
 
-            // 다리 애니메이션 추가
-            leftLeg.classList.add('run');
-            rightLeg.classList.add('run');
-        }
-    });
-    
-    // 다리 & 발 함께 움직이게 설정
-    function startRunning() {
-        leftLeg.classList.add('run');
-        rightLeg.classList.add('run');
-        leftFoot.classList.add('run');
-        rightFoot.classList.add('run');
+nav ul li a:hover {
+    color:  rgb(19, 146, 174); 
+}
+
+
+body {
+    font-family: "Harmattan", sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+.title {
+    position: relative;
+    transform: translate(-50%, -50%);
+    top: 10px;
+    left: 50%;
+    color: black;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 700;
+    margin-top: 0;
+}
+
+
+#container {
+    position: relative;
+    width: 500px;
+    height: 400px;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+label {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+}
+
+input[type="text"] {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+    font-family: "Harmattan", sans-serif;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid #333;
+    border-radius: 20px;
+    outline: none;
+    transition: background-color boarder 0.5s ease;
+}
+
+input[type="text"]:hover {
+    background-color:  rgb(19, 146, 174);
+    border:rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"]:hover::placeholder {
+    color: white; 
+}
+
+.letter {
+    position: absolute;
+    font-size: 24px;
+    font-family: "Harmattan", sans-serif;
+    font-weight: bold;
+    opacity: 0;
+    pointer-events: none;
+    animation: fall 7s linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
     }
-
-    // 마우스 접근 시 도망가면서 다리 & 발 애니메이션 실행
-    checkboxContainer.addEventListener('mousemove', (e) => {
-        // 도망가는 코드 (생략)
-    
-        // 다리 & 발 애니메이션 실행
-        startRunning();
-    });
-
-    function blinkEyes() {
-        console.log("눈 깜빡임 시작"); // 디버깅용 로그
-        leftEye.classList.add('blink');
-        rightEye.classList.add('blink');
-    
-        setTimeout(() => {
-            console.log("눈 깜빡임 끝"); // 디버깅용 로그
-            leftEye.classList.remove('blink');
-            rightEye.classList.remove('blink');
-        }, 200);
+    100% {
+        opacity: 0;
+        transform: translateY(500px);
     }
-    
-    setInterval(() => {
-        blinkEyes();
-        setTimeout(blinkEyes, 500);
-    }, 5000);
-});
+}
+
+.message {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    margin: 20px, 0;
+    font-size: 24px;
+    font-family: "Harmattan", sans-serif;
+    font-weight: 700;
+    color: #d14545;
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+    text-align: center;
+    z-index: 10;
+    animation: fadeIn ease 1.5s forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+input[type='button'] {
+    position: relative;
+    bottom: -80px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 50px;
+    font-size: 14px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type='button']:hover {
+    background-color: rgb(19, 146, 174);
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 7vw;
+    }
+    #container {
+        width: 80vw;
+        height: 50vh;
+    }
+    label, input[type="text"], input[type="button"] {
+        font-size: 4vw;
+    }
+}
