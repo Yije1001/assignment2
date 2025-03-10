@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
-  <!-- Include Lottie library -->
-  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.3.0/dist/dotlottie-wc.js" type="module"></script>
-  <dotlottie-wc src="https://lottie.host/aa8753d1-f2ff-4faf-a1df-ba7dbdeb02ea/BaKlykhtsX.lottie" autoplay loop></dotlottie-wc>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1.0, user-scalable=no">
+    <title>name game</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Harmattan:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-  <div class="robot-container">
-    <div class="robot-checkbox">
-      <dotlottie-wc class="legs" src="https://lottie.host/embed/aa8753d1-f2ff-4faf-a1df-ba7dbdeb02ea/BaKlykhtsX.lottie" autoplay loop></dotlottie-wc>
-      <div class="custom-checkbox">
-        <span class="eye left-eye"></span>
-        <span class="eye right-eye"></span>
-
-        <!-- Lottie animation for the legs -->
-        <!-- <lottie-player 
-          src="https://assets10.lottiefiles.com/packages/lf20_gYtF5Z.json" 
-          background="transparent"  
-          speed="1"  
-          loop  
-          autoplay 
-          class="robot-legs"></lottie-player> -->
-          
-        <div class="left-foot"></div>
-        <div class="right-foot"></div>
-      </div>
-      <label for="robot">I'm not a robot</label>
-      <input type="checkbox" id="robot" style="display: none;">
+    <div class="block-1">
+        <nav>
+            <ul>
+                <li><a href="#">INFO</a></li>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
     </div>
-  </div>
+    <div class="block-2">
+        <div class="title">
+            WELCOME
+        </div>
+        <div id="container">
+            <label for="name">Name:</label>
+            <input type="text" id="name" readonly placeholder="click here">
+        </div>
+        <div id="message" class="message"></div>
+        <div>
+            <input type="button" value="Join us!">
+        </div>
+    </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
